@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0eem0k3rbx7r"]
+
+[ext_resource type="Script" path="res://Scripts/board.gd" id="1_yeoln"]
+[ext_resource type="Texture2D" uid="uid://dboa45h6e8tw7" path="res://Assets/SpriteSheet.png" id="2_rvta5"]
+[ext_resource type="FontFile" uid="uid://fa1hvobt0j4m" path="res://Assets/Yasmen.ttf" id="3_c4tig"]
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_yeoln")
+
+[node name="box" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(175.25, 47.375)
+scale = Vector2(0.617063, 0.346085)
+texture = ExtResource("2_rvta5")
+region_enabled = true
+region_rect = Rect2(36.1211, 1664.36, 252.32, 281.696)
+
+[node name="outline" type="Sprite2D" parent="."]
+position = Vector2(175, 47.5)
+scale = Vector2(0.646018, 0.369048)
+texture = ExtResource("2_rvta5")
+region_enabled = true
+region_rect = Rect2(336.452, 1678.68, 226.842, 252.558)
+
+[node name="Side1" type="Sprite2D" parent="."]
+position = Vector2(148, 41)
+
+[node name="Side2" type="Sprite2D" parent="."]
+position = Vector2(200, 40)
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 101.0
+offset_right = 252.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_c4tig")
+theme_override_font_sizes/font_size = 13
+text = "Information Pannel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Turn_label" type="RichTextLabel" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.686
+anchor_top = 0.247
+anchor_right = 0.686
+anchor_bottom = 0.247
+offset_left = 104.0
+offset_top = 16.0
+offset_right = 243.93
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.998439, 1)
+theme_override_fonts/normal_font = ExtResource("3_c4tig")
+theme_override_font_sizes/normal_font_size = 10
+fit_content = true
+
+[node name="End_turn" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 175.0
+offset_top = 69.0
+offset_right = 235.0
+offset_bottom = 92.0
+theme_override_colors/font_pressed_color = Color(0.831267, 0.226641, 0.441705, 1)
+theme_override_fonts/font = ExtResource("3_c4tig")
+theme_override_font_sizes/font_size = 10
+text = "End Turn"
+
+[node name="summon" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 114.0
+offset_top = 69.0
+offset_right = 174.0
+offset_bottom = 92.0
+scale = Vector2(0.994767, 1.02157)
+theme_override_colors/font_pressed_color = Color(0.831267, 0.226641, 0.441705, 1)
+theme_override_fonts/font = ExtResource("3_c4tig")
+theme_override_font_sizes/font_size = 10
+text = "Summon"
+
+[node name="Side1_Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 47.0
+offset_right = 174.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("3_c4tig")
+
+[node name="Side2_Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 47.0
+offset_right = 226.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("3_c4tig")
+
+[connection signal="pressed" from="End_turn" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="summon" to="." method="_on_summon_pressed"]

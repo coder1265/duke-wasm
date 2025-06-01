@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=4 uid="uid://hjt8f6ilvvy4"]
+
+[ext_resource type="Texture2D" uid="uid://d184i7lra6cp8" path="res://Assets/tilemap.png" id="1_p2o0m"]
+[ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_tdm1q"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="2_uuh0e"]
+[ext_resource type="PackedScene" uid="uid://d0eem0k3rbx7r" path="res://Scenes/Information_holder.tscn" id="3_ct5wo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_152lw"]
+texture = ExtResource("1_p2o0m")
+separation = Vector2i(1, 1)
+0:0/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_o71e4"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_152lw")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tdm1q")
+
+[node name="board_layer" type="TileMapLayer" parent="." groups=["board"]]
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAACAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAABAAEAAQAAAAAAAAADAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAACAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAMAAQAAAAAAAAADAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAAAAQAAQAAAAAAAAACAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAABAAUAAQAAAAAAAAADAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAABAAAAAQAAAAQAAAACAAEAAQAAAAQAAAADAAAAAQAAAAQAAAAFAAAAAQAAAAQAAAAEAAEAAQAAAAQAAAAAAAEAAQAAAAQAAAABAAIAAQAAAAQAAAADAAIAAQAAAAQAAAAFAAIAAQAAAAQAAAAEAAMAAQAAAAQAAAACAAMAAQAAAAQAAAAAAAMAAQAAAAQAAAABAAQAAQAAAAQAAAAAAAUAAQAAAAQAAAACAAUAAQAAAAQAAAADAAQAAQAAAAQAAAAEAAUAAQAAAAQAAAAFAAQAAQAAAAQAAAA=")
+tile_set = SubResource("TileSet_o71e4")
+
+[node name="Board" parent="." instance=ExtResource("3_ct5wo")]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Piece Holder" type="Node2D" parent="."]
+script = ExtResource("2_uuh0e")
