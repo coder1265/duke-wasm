@@ -67,7 +67,7 @@ func white_duke_check():
 		white_duke_summon(x9)
 	pass
 
-func white_duke_summon(x9):
+func white_duke_summon(x9): # need to work on summoning
 	local_white_summon = get_node("/root/Main").is_white_summon
 	print("This is local white summon ", local_white_summon)
 	var placeable_locations = []
