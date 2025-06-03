@@ -27,9 +27,8 @@ func show_clicked_imgs():
 		#print("duke isn't valid instance")
 
 
-func _on_summon_pressed() -> void:
+func _on_summon_pressed():
 	$"..".called_summon()
 
-
-func _on_end_turn_pressed() -> void:
+func _on_end_turn_pressed():
 	$"..".end_turn()

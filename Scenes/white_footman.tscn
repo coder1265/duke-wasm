@@ -15,3 +15,6 @@ shape = SubResource("RectangleShape2D_ll54p")
 [node name="footman_img" type="Sprite2D" parent="."]
 texture = ExtResource("1_yf7v4")
 region_rect = Rect2(16, 16, 0, 0)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

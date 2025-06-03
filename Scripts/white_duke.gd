@@ -1,17 +1,20 @@
 extends Area2D
 
 @onready var duke_pos = $"..".white_duke_start_pos
+@onready var local_white_turn = get_node("/root/Main").is_white_turn
+@onready var local_white_summon = get_node("/root/Main").is_white_summon
 var cell_size = 16
 var is_front: bool = true
 var possible_moves = []
 var mouse_entered_white_duke: bool = false
-var movement_pos = preload("res://Scenes/move_holder.tscn")
 var active_move_holders = []
 var move_coordinates
 var holder
 var is_holder_clicked = false
 var show_moves
-@onready var local_white_turn = get_node("/root/Main").is_white_turn
+var movement_pos = preload("res://Scenes/move_holder.tscn")
+var summon_holder = preload("res://Scenes/summon_holder.tscn")
+var summonable_pieces = ["footman","footman"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,29 +56,37 @@ func _input(event):
 					if is_instance_of($".".get_children()[child],Area2D):
 						$".".get_child(child).queue_free()
 				show_moves = false
-	#before restructuring
-	#if mouse_entered_white_duke == true:
-		#if Input.is_action_just_pressed("left_mouse_click"):
-			#local_white_turn = get_node("/root/Main").is_white_turn
-			#if local_white_turn == true:
-				#print("you clicked the white duke")
-				#do_moves(event)
-	#if Input.is_action_just_pressed("left_mouse_click") and active_move_holders.has(Vector2i(get_global_mouse_position()/cell_size)):
-		#print("oi")
-		#pass
-	#if mouse_entered_white_duke == false:
-		#if Input.is_action_just_pressed("left_mouse_click"):
-			#for child in range($".".get_children().size()):
-				#if is_instance_of($".".get_children()[child],Area2D):
-					#$".".get_child(child).queue_free()
+		white_duke_check()
 
+func white_duke_check():
+	local_pos_to_map()
+	print("This is duke pos ", duke_pos)
+	if duke_pos != null:
+		var x9 = $"/root/Main/board_layer".get_surrounding_cells(duke_pos)
+		print("This is array x9 ",x9)
+		white_duke_summon(x9)
+	pass
 
+func white_duke_summon(x9):
+	local_white_summon = get_node("/root/Main").is_white_summon
+	print("This is local white summon ", local_white_summon)
+	var placeable_locations = []
+	var summoned_piece = summonable_pieces.pick_random()
+	if local_white_summon:
+		#for i in x9:
+			#var x10 = summon_holder.instantiate()
+			#add_child(x10)
+			#x10.position = Vector2i(i.x*cell_size,i.y*cell_size)
+			#if x9[i].x > -1 && x9[i].x < 6 && x9[i].y > -1 && x9[i].y < 6:
+				#print("got to here with no errors, also i is ", i)
+			
+		$"..".summoned_a_piece(summoned_piece)
 
+#region this region is for movement and capturing of the duke
 func do_moves(event):
 	avaliable_moves()
 	check_tile_moves()
 	white_holders()
-	#movement / capture
 
 func avaliable_moves():
 	possible_moves.clear() # clears any possible moves
@@ -110,16 +121,11 @@ func white_holders():
 		holder.global_position = Vector2i(active_move_holders[i]*cell_size)
 		add_child(holder)
 	show_moves = true
-	#for i:Vector2 in active_move_holders:
-		#holder = movement_pos.instantiate()
-		#holder.global_position = Vector2(i.x * cell_size, i.y * cell_size)
-		#add_child(holder)
 
 func _on_area_entered(area: Area2D):
 	if local_white_turn:
 		if area.is_in_group("black_pieces"):
-			#print("It's a black piece")
 			if area.name == "black_duke":
-				#print("on the black duke")
 				$"..".white_wins()
 			area.queue_free()
+#endregion
