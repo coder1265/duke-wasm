@@ -25,5 +25,9 @@ func end_turn():
 		is_white_turn = true
 
 func called_summon():
-	print("Summon stage 2")
-	is_white_summon = true
+	if is_white_turn:
+		is_white_summon = true
+		$"Piece Holder".summoned_white()
+	else:
+		is_black_summon = true
+		$"Piece Holder".summoned_black()

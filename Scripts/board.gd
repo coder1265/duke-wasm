@@ -5,7 +5,7 @@ var wduke = preload("res://Scenes/white_duke.tscn")
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	display_data()
 	show_clicked_imgs()
 

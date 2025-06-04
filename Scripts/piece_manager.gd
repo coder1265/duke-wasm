@@ -3,7 +3,8 @@ var white_duke_preload = preload("res://Scenes/white_duke.tscn")
 var black_duke_preload = preload("res://Scenes/black_duke.tscn")
 @onready var white_duke_start_pos
 var has_instantiated = false
-#region
+var instantiate_location
+#region preloading summon pieces
 
 var white_footman = preload("res://Scenes/white_footman.tscn")
 #var white_pikeman = preload()
@@ -38,7 +39,7 @@ func start_game():
 	has_instantiated = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	mousemappos()
 
 func mousemappos():
@@ -62,7 +63,7 @@ func mousemappos():
 	##print(get_tree().get_nodes_in_group("active_pieces").has("Piece Holder/white_duke"))
 
 func black_wins():
-	pass
+	print("Black wins")
 
 func white_wins():
 	print("White wins")
@@ -70,14 +71,29 @@ func white_wins():
 #endregion 
 
 #region summoning
-func summoned_a_piece(piece_to_make):
+func summoned_white():
+	#print("Summoned white")
+	var all_children = get_children()
+	var found_duke
+	for child in all_children:
+		if child.name == "white_duke":
+			found_duke = child
+	if found_duke != null:
+		found_duke.get_summon_data()
+	
+
+func summoned_black():
+	print("You have summoned black piece")
+	pass
+
+func summoned_a_piece(piece_to_make,current_tile_pos):
 	print("Summoned a piece ", piece_to_make)
 	if $"/root/Main".is_white_turn:
 		if piece_to_make == "footman":
 			var footman_scene = white_footman.instantiate()
 			add_child(footman_scene)
-			var footman_instantiate_pos = Vector2i(0,0)
-			footman_scene.position = $"/root/Main/board_layer".map_to_local(footman_instantiate_pos)
+			#var footman_instantiate_pos = Vector2i(2,2)
+			footman_scene.position = $"/root/Main/board_layer".map_to_local(current_tile_pos)
 
 
 #endregion

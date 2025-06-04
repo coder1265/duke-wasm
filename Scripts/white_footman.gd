@@ -16,7 +16,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_mouse_entered() -> void:
@@ -25,13 +25,16 @@ func _on_mouse_exited() -> void:
 	mouse_entered_footman = false
 
 func _input(event):
-	if Input.is_action_just_pressed("left_mouse_click") && mouse_entered_footman == true:
-		do_footman_moves()
+	if Input.is_action_just_pressed("left_mouse_click"):
+		if mouse_entered_footman == true:
+			local_white_turn = get_node("/root/Main").is_white_turn
+			if local_white_turn == true:
+				do_footman_moves(event)
 		if show_footman_moves: # movement if clicked
 			var x2 = checked_moves.map(func(element): return element + self_position)
-			print("This is x2 ",x2)
+			#print("This is x2 ",x2)
 			if x2.has(Vector2i(get_global_mouse_position()/cell_size)):
-				print("Upto here quick check")
+				#print("Upto here quick check")
 				self.position = (Vector2i(get_global_mouse_position()/cell_size)*cell_size)+Vector2i(8,8)
 				if is_front_side:
 					is_front_side = false
@@ -44,8 +47,7 @@ func _input(event):
 						$".".get_child(child).queue_free()
 				show_footman_moves = false
 
-func do_footman_moves():
-	pass
+func do_footman_moves(_event):
 	get_footman_moves() # get avaliable moves in array
 	check_tile_moves() # check avaliable moves array and return correct ones in new array
 	white_footman_holders() # show holders in the array
@@ -74,7 +76,7 @@ func check_tile_moves():
 		var new_coords = i + self_position
 		if new_coords.x > -1 and new_coords.x < 6 and new_coords.y > -1 and new_coords.y < 6:
 			checked_moves.push_back(i) 
-	checked_moves.remove_at(checked_moves.find(Vector2i(0,0)))
+	#checked_moves.remove_at(checked_moves.find(Vector2i(0,0)))
 	print("Checked avaliable moves are: ",checked_moves)
 
 func white_footman_holders():
@@ -83,8 +85,7 @@ func white_footman_holders():
 		move_holder.global_position = Vector2i(checked_moves[i]*cell_size)
 		add_child(move_holder)
 	show_footman_moves = true
-	print("show_footman_moves = true")
-#
+	
 func _on_area_entered(area: Area2D):
 	if local_white_turn:
 		if area.is_in_group("black_pieces"):
