@@ -94,6 +94,14 @@ func summoned_a_piece(piece_to_make,current_tile_pos):
 			add_child(footman_scene)
 			#var footman_instantiate_pos = Vector2i(2,2)
 			footman_scene.position = $"/root/Main/board_layer".map_to_local(current_tile_pos)
+			next_turn()
+	
 
 
 #endregion
+
+func next_turn():
+	if $"/root/Main".is_white_turn:
+		$"/root/Main".is_white_turn = false
+	else:
+		$"/root/Main".is_white_turn = true

@@ -61,7 +61,6 @@ func _input(event):
 				else:
 					is_front = true
 				get_node("/root/Main").is_white_turn = false
-
 		if mouse_entered_white_duke == false:
 				for child in range($".".get_children().size()):
 					if is_instance_of($".".get_children()[child],Area2D):
@@ -69,36 +68,36 @@ func _input(event):
 				show_moves = false
 
 func get_summon_data():
-	#print("White duke summoned")
-	local_pos_to_map()
-	#print("This is duke pos ", duke_pos)
-	if duke_pos != null:
-		var x9 = $"/root/Main/board_layer".get_surrounding_cells(duke_pos)
-		print("This is array x9 ",x9)
-	#print("This is local white summon ", local_white_summon)
-		for i in x9:
-			if i.x > -1 && i.x < 6 && i.y > -1 && i.y < 6:
-				placeable_locations.append(i)
-		print("This is placeable locations ",placeable_locations)
-		
-		for i in range(placeable_locations.size()):
-			var summon_place = summon_holder.instantiate()
-			add_child(summon_place)
-			#summon_place.position = $"/root/Main/board_layer".map_to_local(Vector2i(placeable_locations[i]))
-			summon_place.global_position = Vector2i(placeable_locations[i]*cell_size) + Vector2i(8,8)
-			print("Summon place position", summon_place.position)
-		show_summon_locations = true
+	if summonable_pieces.size() > 0:
+		local_pos_to_map()
+		if duke_pos != null:
+			var x9 = $"/root/Main/board_layer".get_surrounding_cells(duke_pos)
+			#print("This is array x9 ",x9)
+			for i in x9:
+				if i.x > -1 && i.x < 6 && i.y > -1 && i.y < 6:
+					placeable_locations.append(i)
+			print("This is placeable locations ",placeable_locations)
+			
+			for i in range(placeable_locations.size()):
+				var summon_place = summon_holder.instantiate()
+				add_child(summon_place)
+				#summon_place.position = $"/root/Main/board_layer".map_to_local(Vector2i(placeable_locations[i]))
+				summon_place.global_position = Vector2i(placeable_locations[i]*cell_size) + Vector2i(8,8)
+				#print("Summon place position", summon_place.position)
+			show_summon_locations = true
+	else:
+		print("Can't summon")
+		# implement function to state on information board that you can't summon
 
 func clicked_summon():
-	print("Upto clicked summon")
 	summoned_piece = summonable_pieces.pick_random()
+	summonable_pieces.erase(summoned_piece)
 	$"..".summoned_a_piece(summoned_piece,current_tile_pos)
 	get_node("/root/Main").is_white_summon = false
 	if is_front:
 			is_front = false
 	else:
 			is_front = true
-		
 
 #region this region is for movement and capturing of the duke
 func do_moves(_event):
