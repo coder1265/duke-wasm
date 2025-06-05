@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d22jjj1airefb"]
+[gd_scene load_steps=6 format=3 uid="uid://d22jjj1airefb"]
 
 [ext_resource type="Script" path="res://Scripts/win_screen.gd" id="1_6cfmo"]
 [ext_resource type="Texture2D" uid="uid://bfr45dbtk537i" path="res://Assets/Screen assets/Board icon.png" id="1_8yry8"]
+[ext_resource type="Texture2D" uid="uid://1lffgynv4ga" path="res://Assets/Screen assets/text icon.png" id="3_vob3f"]
+[ext_resource type="Texture2D" uid="uid://b32qlrwwa1bis" path="res://Assets/Screen assets/SpriteSheet.png" id="4_xcc7a"]
 
 [sub_resource type="Curve" id="Curve_kudbp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
@@ -86,6 +88,14 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "RESTART"
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -240.0
+offset_top = -218.0
+offset_right = 224.0
+offset_bottom = -58.0
+texture = ExtResource("3_vob3f")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -100,5 +110,11 @@ offset_bottom = -132.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/normal_font_size = 40
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-256, -44)
+texture = ExtResource("4_xcc7a")
+region_enabled = true
+region_rect = Rect2(33, 853, 72, 88)
 
 [connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]

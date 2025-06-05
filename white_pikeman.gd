@@ -3,7 +3,7 @@ extends Area2D
 # need to implement strike capability
 @onready var local_white_turn = get_node("/root/Main").is_white_turn
 var mouse_entered_self: bool = false
-var is_front_side = true
+var is_front_side: bool = true
 var avaliable_moves = []
 var checked_moves = []
 var movement_pos = preload("res://Scenes/move_holder.tscn")
@@ -16,6 +16,12 @@ func _on_mouse_entered() -> void:
 	mouse_entered_self = true
 func _on_mouse_exited() -> void:
 	mouse_entered_self = false
+
+func _process(delta: float) -> void:
+	if is_front_side:
+		$white_pikeman.animation = "front"
+	else:
+		$white_pikeman.animation = "back"
 
 func _input(event):
 	if Input.is_action_just_pressed("left_mouse_click"):

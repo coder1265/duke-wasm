@@ -5,8 +5,7 @@ var black_duke_preload = preload("res://Scenes/black_duke.tscn")
 var has_instantiated = false
 var instantiate_location
 
-signal white_winner
-signal black_winner
+@onready var board = $"/root/Main/board_layer"
 
 #region preloading summon pieces
 
@@ -93,7 +92,6 @@ func summoned_black():
 	pass
 
 func summoned_a_piece(piece_to_make,current_tile_pos):
-	var board = $"/root/Main/board_layer"
 	print("Summoned a piece ", piece_to_make)
 	if $"/root/Main".is_white_turn:
 		if piece_to_make == "footman":
@@ -116,3 +114,15 @@ func next_turn():
 		$"/root/Main".is_white_turn = false
 	else:
 		$"/root/Main".is_white_turn = true
+var used_positions = []
+#func get_used_positions() -> Array:
+	## Get all Area2D nodes in the "active_pieces" group
+	#var active_pieces = get_tree().get_nodes_in_group("active_pieces")
+	#used_positions.clear()
+	## For each active piece, convert its world position to tile coordinates
+	#for piece in active_pieces:
+		#if piece is Area2D:
+			#var world_pos = piece.global_position
+			#var tile_pos = board.local_to_map(world_pos)
+			#used_positions.append(tile_pos)
+	#return used_positions
