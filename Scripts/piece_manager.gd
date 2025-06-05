@@ -43,9 +43,6 @@ func start_game():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	mousemappos()
-
-func mousemappos():
 	var the_mouse_position = get_global_mouse_position()
 	var local_pos = $"../board_layer".local_to_map(the_mouse_position)
 	if Input.is_action_just_pressed("left_mouse_click"):
@@ -114,15 +111,3 @@ func next_turn():
 		$"/root/Main".is_white_turn = false
 	else:
 		$"/root/Main".is_white_turn = true
-var used_positions = []
-#func get_used_positions() -> Array:
-	## Get all Area2D nodes in the "active_pieces" group
-	#var active_pieces = get_tree().get_nodes_in_group("active_pieces")
-	#used_positions.clear()
-	## For each active piece, convert its world position to tile coordinates
-	#for piece in active_pieces:
-		#if piece is Area2D:
-			#var world_pos = piece.global_position
-			#var tile_pos = board.local_to_map(world_pos)
-			#used_positions.append(tile_pos)
-	#return used_positions
