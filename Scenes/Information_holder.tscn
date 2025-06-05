@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://fa1hvobt0j4m" path="res://Assets/Yasmen.ttf" id="3_c4tig"]
 
 [node name="Board" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
@@ -32,7 +33,6 @@ position = Vector2(148, 41)
 position = Vector2(200, 40)
 
 [node name="Label" type="Label" parent="."]
-texture_filter = 1
 layout_mode = 0
 offset_left = 101.0
 offset_right = 252.0
@@ -63,7 +63,6 @@ theme_override_font_sizes/normal_font_size = 10
 fit_content = true
 
 [node name="End_turn" type="Button" parent="."]
-texture_filter = 1
 layout_mode = 0
 offset_left = 175.0
 offset_top = 69.0
@@ -75,7 +74,6 @@ theme_override_font_sizes/font_size = 10
 text = "End Turn"
 
 [node name="summon" type="Button" parent="."]
-texture_filter = 1
 layout_mode = 0
 offset_left = 114.0
 offset_top = 69.0

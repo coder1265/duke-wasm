@@ -4,10 +4,14 @@ var black_duke_preload = preload("res://Scenes/black_duke.tscn")
 @onready var white_duke_start_pos
 var has_instantiated = false
 var instantiate_location
+
+signal white_winner
+signal black_winner
+
 #region preloading summon pieces
 
 var white_footman = preload("res://Scenes/white_footman.tscn")
-#var white_pikeman = preload()
+var white_pikeman = preload("res://Scenes/white_pikeman.tscn")
 #var white_priest = preload()
 #var white_assassin = preload()
 #var white_champion = preload()
@@ -64,9 +68,11 @@ func mousemappos():
 
 func black_wins():
 	print("Black wins")
+	emit_signal("black_winner")
 
 func white_wins():
-	print("White wins")
+	emit_signal("white_winner")
+	get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
 
 #endregion 
 
@@ -87,14 +93,19 @@ func summoned_black():
 	pass
 
 func summoned_a_piece(piece_to_make,current_tile_pos):
+	var board = $"/root/Main/board_layer"
 	print("Summoned a piece ", piece_to_make)
 	if $"/root/Main".is_white_turn:
 		if piece_to_make == "footman":
 			var footman_scene = white_footman.instantiate()
 			add_child(footman_scene)
 			#var footman_instantiate_pos = Vector2i(2,2)
-			footman_scene.position = $"/root/Main/board_layer".map_to_local(current_tile_pos)
+			footman_scene.position = board.map_to_local(current_tile_pos)
 			next_turn()
+		if piece_to_make == "pikeman":
+			var pikeman_scene = white_pikeman.instantiate()
+			add_child(pikeman_scene)
+			pikeman_scene.position = board.map_to_local(current_tile_pos)
 	
 
 

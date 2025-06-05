@@ -15,10 +15,6 @@ run/main_scene="res://Scenes/Main_Game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[display]
-
-window/stretch/scale=3.0
-
 [editor]
 
 version_control/plugin_name="GitPlugin"
@@ -41,6 +37,6 @@ left_mouse_click={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true

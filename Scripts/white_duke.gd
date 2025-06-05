@@ -15,7 +15,7 @@ var show_moves
 var show_summon_locations
 var movement_pos = preload("res://Scenes/move_holder.tscn")
 var summon_holder = preload("res://Scenes/summon_holder.tscn")
-var summonable_pieces = ["footman","footman"]
+var summonable_pieces = ["footman","footman","pikeman"]
 var summoned_piece
 var placeable_locations = []
 var current_tile_pos
@@ -126,6 +126,7 @@ func check_tile_moves():
 			active_move_holders.push_back(iterable) 
 	active_move_holders.remove_at(active_move_holders.find(Vector2i(0,0)))
 	print("Possible moves are: ",active_move_holders)
+
 
 func local_pos_to_map():
 	var x1 = get_tree().get_nodes_in_group("board")

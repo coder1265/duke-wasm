@@ -29,3 +29,7 @@ size_flags_vertical = 4
 
 [node name="Piece Holder" type="Node2D" parent="."]
 script = ExtResource("2_uuh0e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(118, 53)
+zoom = Vector2(4, 4)

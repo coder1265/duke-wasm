@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ll54p"]
 size = Vector2(14, 14)
 
-[node name="white_footman" type="Area2D"]
+[node name="white_footman" type="Area2D" groups=["active_pieces", "white_pieces"]]
 script = ExtResource("1_ueyoc")
 
 [node name="footman_shape" type="CollisionShape2D" parent="."]
