@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://drshnufabuq2w"]
 
-[ext_resource type="Script" path="res://white_pikeman.gd" id="1_cuhbt"]
+[ext_resource type="Script" path="res://Scripts/white_pikeman.gd" id="1_cuhbt"]
 [ext_resource type="Texture2D" uid="uid://x0oee84jsik3" path="res://Assets/AllAssetsPreview.png" id="2_l3jmq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k8tp3"]
@@ -93,9 +93,11 @@ size = Vector2(16, 16)
 script = ExtResource("1_cuhbt")
 
 [node name="white_pikeman" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4nigo")
-animation = &"front"
+animation = &"back"
 autoplay = "front"
+frame_progress = 0.833325
 
 [node name="white_pikeman_shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_naowg")

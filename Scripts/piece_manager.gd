@@ -4,6 +4,8 @@ var black_duke_preload = preload("res://Scenes/black_duke.tscn")
 @onready var white_duke_start_pos
 var has_instantiated = false
 var instantiate_location
+var white_duke
+var summon_move_checker:bool = false
 
 @onready var board = $"/root/Main/board_layer"
 
@@ -50,18 +52,6 @@ func _process(_delta: float) -> void:
 
 
 #region sort the winner code with kester later
-#func is_winner():
-	#var group = get_tree().get_nodes_in_group("active_pieces")
-	#if str(group[0]) != "white_duke:<Area2D#26608665888>":
-		#print("Black wins")
-		#black_wins()
-	#if str(group[1]) != "black_duke:<Area2D#26658997540>":
-		#print("White wins")
-		#white_wins()
-	##print("black duke is still alive")
-	##print(group)
-	##print(get_tree().get_nodes_in_group("active_pieces").has("Piece Holder/white_duke"))
-
 func black_wins():
 	print("Black wins")
 	emit_signal("black_winner")
@@ -76,34 +66,34 @@ func white_wins():
 func summoned_white():
 	#print("Summoned white")
 	var all_children = get_children()
-	var found_duke
 	for child in all_children:
 		if child.name == "white_duke":
-			found_duke = child
-	if found_duke != null:
-		found_duke.get_summon_data()
-	
+			white_duke = child
+	if white_duke != null:
+		summon_move_checker = true
+		white_duke.get_summon_data()
 
 func summoned_black():
 	print("You have summoned black piece")
 	pass
 
-func summoned_a_piece(piece_to_make,current_tile_pos):
-	print("Summoned a piece ", piece_to_make)
+func summoned_a_piece(piece_to_make):
+	print("Summoned a piece ", piece_to_make, "Coordinates of piece are", instantiate_location)
 	if $"/root/Main".is_white_turn:
-		if piece_to_make == "footman":
-			var footman_scene = white_footman.instantiate()
-			add_child(footman_scene)
-			#var footman_instantiate_pos = Vector2i(2,2)
-			footman_scene.position = board.map_to_local(current_tile_pos)
-			next_turn()
-		if piece_to_make == "pikeman":
-			var pikeman_scene = white_pikeman.instantiate()
-			add_child(pikeman_scene)
-			pikeman_scene.position = board.map_to_local(current_tile_pos)
-	
-
-
+		if instantiate_location != null:
+			if piece_to_make == "footman":
+				var footman_scene = white_footman.instantiate()
+				add_child(footman_scene)
+				#var footman_instantiate_pos = Vector2i(2,2)
+				footman_scene.position = board.map_to_local(instantiate_location)
+				next_turn()
+			if piece_to_make == "pikeman":
+				var pikeman_scene = white_pikeman.instantiate()
+				add_child(pikeman_scene)
+				pikeman_scene.position = board.map_to_local(instantiate_location)
+				next_turn()
+		elif instantiate_location == null:
+			summon_move_checker = false
 #endregion
 
 func next_turn():

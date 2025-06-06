@@ -1,0 +1,125 @@
+[gd_scene load_steps=5 format=3 uid="uid://r6rdqh8wew7q"]
+
+[ext_resource type="Texture2D" uid="uid://bfr45dbtk537i" path="res://Assets/Screen assets/Board icon.png" id="1_5j5lu"]
+[ext_resource type="Script" path="res://Scripts/play_screen.gd" id="1_20yao"]
+[ext_resource type="Texture2D" uid="uid://c0ta6x2x2yx0o" path="res://Assets/Screen assets/play_button.png" id="2_u13sg"]
+[ext_resource type="FontFile" uid="uid://fa1hvobt0j4m" path="res://Assets/Yasmen.ttf" id="3_rg7de"]
+
+[node name="Play" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_20yao")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_5j5lu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+text = "PLAY"
+fit_content = true
+
+[node name="play" type="Button" parent="MarginContainer"]
+z_index = 2
+custom_minimum_size = Vector2(160, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -61.0
+offset_right = -43.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_u13sg")
+stretch_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -23.0
+offset_right = 46.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_rg7de")
+theme_override_font_sizes/normal_font_size = 40
+text = "Play"
+fit_content = true
+
+[node name="quit" type="Button" parent="MarginContainer"]
+z_index = 2
+custom_minimum_size = Vector2(160, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -61.0
+offset_right = -43.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture = ExtResource("2_u13sg")
+stretch_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -23.0
+offset_right = 46.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_rg7de")
+theme_override_font_sizes/normal_font_size = 40
+text = "Quit"
+fit_content = true
+
+[connection signal="pressed" from="MarginContainer/play" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/quit" to="." method="_on_quit_pressed"]

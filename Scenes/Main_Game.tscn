@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://hjt8f6ilvvy4"]
+[gd_scene load_steps=8 format=4 uid="uid://hjt8f6ilvvy4"]
 
 [ext_resource type="Texture2D" uid="uid://d184i7lra6cp8" path="res://Assets/tilemap.png" id="1_p2o0m"]
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_tdm1q"]
 [ext_resource type="Script" path="res://Scripts/piece_manager.gd" id="2_uuh0e"]
 [ext_resource type="PackedScene" uid="uid://d0eem0k3rbx7r" path="res://Scenes/Information_holder.tscn" id="3_ct5wo"]
+[ext_resource type="PackedScene" uid="uid://drshnufabuq2w" path="res://Scenes/white_pikeman.tscn" id="5_4pkkn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_152lw"]
 texture = ExtResource("1_p2o0m")
@@ -29,6 +30,9 @@ size_flags_vertical = 4
 
 [node name="Piece Holder" type="Node2D" parent="."]
 script = ExtResource("2_uuh0e")
+
+[node name="white_pikeman" parent="Piece Holder" instance=ExtResource("5_4pkkn")]
+position = Vector2(8, 88)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(118, 53)
