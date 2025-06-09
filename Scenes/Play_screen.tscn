@@ -35,7 +35,22 @@ layout_mode = 2
 text = "PLAY"
 fit_content = true
 
-[node name="play" type="Button" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -102.0
+offset_right = 80.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="play" type="Button" parent="VBoxContainer"]
 z_index = 2
 custom_minimum_size = Vector2(160, 100)
 layout_mode = 2
@@ -43,7 +58,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/play"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/play"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,10 +72,11 @@ offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
+mouse_filter = 2
 texture = ExtResource("2_u13sg")
 stretch_mode = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/play"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/play"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,12 +89,13 @@ offset_right = 46.0
 offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("3_rg7de")
 theme_override_font_sizes/normal_font_size = 40
 text = "Play"
 fit_content = true
 
-[node name="quit" type="Button" parent="MarginContainer"]
+[node name="quit" type="Button" parent="VBoxContainer"]
 z_index = 2
 custom_minimum_size = Vector2(160, 100)
 layout_mode = 2
@@ -86,7 +103,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/quit"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/quit"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -103,7 +120,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("2_u13sg")
 stretch_mode = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/quit"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/quit"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -116,10 +133,11 @@ offset_right = 46.0
 offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_fonts/normal_font = ExtResource("3_rg7de")
 theme_override_font_sizes/normal_font_size = 40
 text = "Quit"
 fit_content = true
 
-[connection signal="pressed" from="MarginContainer/play" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="MarginContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/play" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]

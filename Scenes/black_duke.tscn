@@ -1,10 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://vdcsltyiaqv"]
+[gd_scene load_steps=7 format=3 uid="uid://vdcsltyiaqv"]
 
 [ext_resource type="Script" path="res://Scripts/black_duke.gd" id="1_mfmtm"]
-[ext_resource type="Texture2D" uid="uid://djn61hko2p165" path="res://Assets/black_king.png" id="2_fwo2c"]
+[ext_resource type="Texture2D" uid="uid://dsod1uatpml0j" path="res://Assets/red_duke.png" id="2_tckyc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tknc0"]
 size = Vector2(12, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh6bv"]
+atlas = ExtResource("2_tckyc")
+region = Rect2(0, 0, 60, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhw12"]
+atlas = ExtResource("2_tckyc")
+region = Rect2(60, 0, 60, 76)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rp38p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh6bv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhw12")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [node name="black_duke" type="Area2D" groups=["active_pieces", "black_pieces"]]
 z_index = 2
@@ -13,9 +35,12 @@ script = ExtResource("1_mfmtm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tknc0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_fwo2c")
-region_rect = Rect2(2.89456, 1.8454, 12.1036, 16.2011)
+position = Vector2(-1.19209e-07, -1.49012e-07)
+scale = Vector2(0.2, 0.184211)
+sprite_frames = SubResource("SpriteFrames_rp38p")
+autoplay = "default"
+frame_progress = 0.748283
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

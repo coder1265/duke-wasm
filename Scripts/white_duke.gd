@@ -17,7 +17,9 @@ var new_positions = [] # positions to move to for summoning
 var is_front: bool = true
 var mouse_entered_white_duke: bool = false
 var is_holder_clicked:bool = false
-var cell_size = 16
+var cell_size:int = 16
+@onready var min_left:int
+
 var move_coordinates
 var holder
 var show_moves
@@ -53,6 +55,9 @@ func _input(event):
 				
 		if mouse_entered_white_duke == false: # deletes children if clicked of the duke positions
 			delete_children()
+			show_summon_locations = false
+			
+			
 #region controls code for summoning
 func get_summon_data():
 	if summonable_pieces.size() > 0:

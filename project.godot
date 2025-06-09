@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Duke_as_is_trial_2_github_version"
-run/main_scene="res://Scenes/Main_Game.tscn"
+run/main_scene="res://Scenes/Play_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/image="res://Assets/Screen assets/Loading screen.png"
-config/icon="res://icon.svg"
+config/icon="res://Assets/Screen assets/Loading screen.png"
 
 [editor]
 

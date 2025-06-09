@@ -8,6 +8,10 @@ var selected_piece
 var mouse_position
 @onready var global_tilemaplayer_ref = $board_layer
 var main_layer_id
+var min_left:int
+var min_right:int
+var min_top:int
+var min_bottom:int
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
