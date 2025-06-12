@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d22jjj1airefb"]
+[gd_scene load_steps=8 format=3 uid="uid://d22jjj1airefb"]
 
 [ext_resource type="Script" path="res://Scripts/win_screen.gd" id="1_6cfmo"]
 [ext_resource type="Texture2D" uid="uid://bfr45dbtk537i" path="res://Assets/Screen assets/Board icon.png" id="1_8yry8"]
@@ -8,6 +8,12 @@
 [sub_resource type="Curve" id="Curve_kudbp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="InputEventKey" id="InputEventKey_bklur"]
+keycode = 82
+
+[sub_resource type="Shortcut" id="Shortcut_7cplb"]
+events = [SubResource("InputEventKey_bklur")]
 
 [node name="win_screen" type="Control"]
 layout_mode = 3
@@ -86,6 +92,7 @@ offset_bottom = 233.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
+shortcut = SubResource("Shortcut_7cplb")
 text = "RESTART"
 
 [node name="TextureRect2" type="TextureRect" parent="."]

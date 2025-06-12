@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var local_white_turn = get_node("/root/Main").is_white_turn
+@onready var board = $"/root/Main/board_layer"
 var mouse_entered_footman: bool = false
 var is_front_side = false
 var avaliable_moves = []
@@ -10,6 +11,10 @@ var move_holder
 var cell_size = 16
 var show_footman_moves
 var self_position
+var min_left = -1
+var min_right = 6
+var min_top = -1
+var min_bottom = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,17 +72,26 @@ func get_footman_moves():
 		#print("Footman moves are", avaliable_moves)
 
 func check_tile_moves():
-	var tilemap_reference = get_tree().get_nodes_in_group("board")
 	var white_footman_position = self.position
-	self_position = tilemap_reference[0].local_to_map(white_footman_position)
+	self_position = board.local_to_map(white_footman_position)
 	
 	checked_moves.clear()
 	for i in avaliable_moves:
 		var new_coords = i + self_position
-		if new_coords.x > -1 and new_coords.x < 6 and new_coords.y > -1 and new_coords.y < 6:
+		if new_coords.x > min_left and new_coords.x < min_right and new_coords.y > min_top and new_coords.y < min_bottom:
 			checked_moves.push_back(i) 
 	#checked_moves.remove_at(checked_moves.find(Vector2i(0,0)))
-	print("Checked avaliable moves are: ",checked_moves)
+	var white_piece_locations = get_tree().get_nodes_in_group("white_pieces")
+	var delete_from_checked_moves = []
+	for i in white_piece_locations:
+		if i is Area2D and i != self:
+			var area_tilemap_pos = board.local_to_map(i.global_position) - self_position
+			delete_from_checked_moves.append(area_tilemap_pos)
+	for i in checked_moves:
+		if delete_from_checked_moves.has(i):
+			checked_moves.erase(i)
+	
+	
 
 func white_footman_holders():
 	for i in range(checked_moves.size()):

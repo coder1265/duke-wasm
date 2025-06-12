@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://bomwxvy1bgg40"]
+
+[ext_resource type="Script" path="res://Scripts/white_footman.gd" id="1_ueyoc"]
+[ext_resource type="Texture2D" uid="uid://c8sonb8u7any6" path="res://Assets/footman.png" id="2_i2wk8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb4b3"]
+atlas = ExtResource("2_i2wk8")
+region = Rect2(7, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3uht"]
+atlas = ExtResource("2_i2wk8")
+region = Rect2(37, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hna00"]
+atlas = ExtResource("2_i2wk8")
+region = Rect2(67, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31tec"]
+atlas = ExtResource("2_i2wk8")
+region = Rect2(97, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_obbfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb4b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3uht")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hna00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31tec")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll54p"]
+size = Vector2(14, 14)
+
+[node name="white_footman" type="Area2D" groups=["active_pieces", "white_pieces"]]
+script = ExtResource("1_ueyoc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_obbfp")
+animation = &"front"
+autoplay = "front"
+
+[node name="footman_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ll54p")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

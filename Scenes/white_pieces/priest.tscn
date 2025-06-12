@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://o1k7o7j6fc4d"]
+
+[ext_resource type="Script" path="res://Scripts/white_priest.gd" id="1_2ajk2"]
+[ext_resource type="Texture2D" uid="uid://vsn0m7x7x1i4" path="res://Assets/priests.png" id="2_g24y1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b32o8"]
+atlas = ExtResource("2_g24y1")
+region = Rect2(60, 1, 12, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnfss"]
+atlas = ExtResource("2_g24y1")
+region = Rect2(76, 1, 12, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8q4e"]
+atlas = ExtResource("2_g24y1")
+region = Rect2(2, 1, 10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4noa2"]
+atlas = ExtResource("2_g24y1")
+region = Rect2(18, 1, 10, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_41xj0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b32o8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnfss")
+}],
+"loop": true,
+"name": &"back",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8q4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4noa2")
+}],
+"loop": true,
+"name": &"front",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtenp"]
+size = Vector2(16, 16)
+
+[node name="priest" type="Area2D" groups=["active_pieces", "white_pieces"]]
+script = ExtResource("1_2ajk2")
+
+[node name="priest" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1.19209e-07, 0)
+scale = Vector2(1.2, 1)
+sprite_frames = SubResource("SpriteFrames_41xj0")
+animation = &"front"
+autoplay = "front"
+frame_progress = 0.803013
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mtenp")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://v2agt7cafb1k"]
+
+[ext_resource type="Script" path="res://Scripts/white_seer.gd" id="1_4tqw3"]
+[ext_resource type="Texture2D" uid="uid://biq64uao0favb" path="res://Assets/seer_2.png" id="2_22vtp"]
+[ext_resource type="Texture2D" uid="uid://d0a2o1tfr1n5a" path="res://Assets/seer.png" id="2_hwqav"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v71ws"]
+atlas = ExtResource("2_22vtp")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7djma"]
+atlas = ExtResource("2_22vtp")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r340"]
+atlas = ExtResource("2_hwqav")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mugav"]
+atlas = ExtResource("2_hwqav")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_41xj0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v71ws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7djma")
+}],
+"loop": true,
+"name": &"back",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r340")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mugav")
+}],
+"loop": true,
+"name": &"front",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtenp"]
+size = Vector2(16, 16)
+
+[node name="seer" type="Area2D" groups=["active_pieces", "white_pieces"]]
+script = ExtResource("1_4tqw3")
+
+[node name="seer_img" type="AnimatedSprite2D" parent="." groups=["active_pieces", "white_pieces"]]
+texture_filter = 1
+position = Vector2(-4.76837e-07, 0)
+scale = Vector2(0.333333, 0.333333)
+sprite_frames = SubResource("SpriteFrames_41xj0")
+animation = &"front"
+autoplay = "front"
+frame_progress = 0.551969
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mtenp")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -6,7 +6,7 @@ extends Area2D
 @onready var board = $"/root/Main/board_layer"
 var movement_pos = preload("res://Scenes/move_holder.tscn")
 var summon_holder = preload("res://Scenes/summon_holder.tscn")
-var summonable_pieces = ["footman","footman","pikeman"]
+var summonable_pieces = ["footman","pikeman","pikeman","pikeman","champion","seer","wizard","assassin","priest"]
 var possible_moves = []
 var possible_moves_on_board = []
 var placeable_locations = []
@@ -70,8 +70,13 @@ func get_summon_data():
 					placeable_locations.append(i)
 			#print("This is placeable locations ",placeable_locations)
 			new_positions = updates_moves_to_not_include_white_pieces(placeable_locations)
-			for i in new_positions:
-				if map_not_valid_locations.has(i):
+			print("Summonable positions local to the map ", new_positions)
+			var check3 = []
+			for i in unplaceable_locations:
+				var local_to_the_white_duke = i + duke_pos
+				check3.append(local_to_the_white_duke)
+			for i in check3:
+				if check3.has(i):
 					new_positions.erase(i)
 			#print("This is new new placeable locations", placeable_locations)
 			#print("This is new positions ",new_positions)

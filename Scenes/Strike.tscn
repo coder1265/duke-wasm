@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cny7pmo4aa85u"]
+
+[ext_resource type="Texture2D" uid="uid://vt2n0y743koe" path="res://Assets/strike_img.png" id="1_uaivr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_icl52"]
+size = Vector2(14, 14)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_uaivr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_icl52")

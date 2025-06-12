@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0eem0k3rbx7r"]
+[gd_scene load_steps=6 format=3 uid="uid://d0eem0k3rbx7r"]
 
 [ext_resource type="Script" path="res://Scripts/board.gd" id="1_yeoln"]
 [ext_resource type="Texture2D" uid="uid://dboa45h6e8tw7" path="res://Assets/SpriteSheet.png" id="2_rvta5"]
 [ext_resource type="FontFile" uid="uid://fa1hvobt0j4m" path="res://Assets/Yasmen.ttf" id="3_c4tig"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_w0iml"]
+keycode = 69
+
+[sub_resource type="Shortcut" id="Shortcut_bghwh"]
+events = [SubResource("InputEventKey_w0iml")]
 
 [node name="Board" type="Control"]
 texture_filter = 1
@@ -71,6 +77,7 @@ offset_bottom = 92.0
 theme_override_colors/font_pressed_color = Color(0.831267, 0.226641, 0.441705, 1)
 theme_override_fonts/font = ExtResource("3_c4tig")
 theme_override_font_sizes/font_size = 10
+shortcut = SubResource("Shortcut_bghwh")
 text = "End Turn"
 
 [node name="summon" type="Button" parent="."]

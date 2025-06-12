@@ -6,25 +6,27 @@ var has_instantiated = false
 var instantiate_location
 var white_duke
 var summon_move_checker:bool = false
+var startup_senario:Array = [1,2] # do this later
 
 @onready var board = $"/root/Main/board_layer"
 
 #region preloading summon pieces
 
-var white_footman = preload("res://Scenes/white_footman.tscn")
-var white_pikeman = preload("res://Scenes/white_pikeman.tscn")
-#var white_priest = preload()
-#var white_assassin = preload()
-#var white_champion = preload()
+var white_footman = preload("res://Scenes/white_pieces/white_footman.tscn")
+var white_pikeman = preload("res://Scenes/white_pieces/white_pikeman.tscn")
+var white_priest = preload("res://Scenes/white_pieces/priest.tscn")
+var white_assassin = preload("res://Scenes/white_pieces/assassin.tscn")
+var white_champion = preload("res://Scenes/white_pieces/champion.tscn")
 #var white_knight = preload()
 #var white_bowman = preload()
 #var white_longbowman = preload()
 #var white_general = preload()
-#var white_seer = preload()
-#var white_wizard = preload()
+var white_seer = preload("res://Scenes/white_pieces/seer.tscn")
+var white_wizard = preload("res://Scenes/white_pieces/wizard.tscn")
 #var white_ranger = preload()
 #var white_marshal = preload()
 #var white_dragoon = preload()
+var black_footman
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -36,12 +38,14 @@ func start_game():
 	add_child(white_duke_scene)
 	white_duke_start_pos = Vector2i(2,5)
 	white_duke_scene.position = $"../board_layer".map_to_local(white_duke_start_pos)
+	white_scenarios()
 	
 	var black_duke_scene = black_duke_preload.instantiate()
 	add_child(black_duke_scene)
 	var black_duke_start_pos = Vector2i(3,0)
 	black_duke_scene.position = $"../board_layer".map_to_local(black_duke_start_pos)
 	has_instantiated = true
+	#black_scenarios() # uncomment this once made black footman
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -49,15 +53,60 @@ func _process(_delta: float) -> void:
 	var local_pos = $"../board_layer".local_to_map(the_mouse_position)
 	if Input.is_action_just_pressed("left_mouse_click"):
 		print(local_pos)
+	#check_winners()
 
+func white_scenarios():
+	var place_1 = startup_senario.pick_random()
+	var footman_scene = white_footman.instantiate()
+	var footman_start_pos = Vector2i(2,4)
+	footman_scene.position = board.map_to_local(footman_start_pos)
+	add_child(footman_scene)
+	if place_1 == 1:
+		var footman_scene1 = white_footman.instantiate()
+		var footman_start_pos1 = Vector2i(1,5)
+		footman_scene1.position = board.map_to_local(footman_start_pos1)
+		add_child(footman_scene1)
+	elif place_1 == 2:
+		var footman_scene2 = white_footman.instantiate()
+		var footman_start_pos2 = Vector2i(3,5)
+		footman_scene2.position = board.map_to_local(footman_start_pos2)
+		add_child(footman_scene2)
+
+func black_scenarios():
+	var place_b = startup_senario.pick_random()
+	var footman_scene = black_footman.instantiate()
+	var footman_start_pos = Vector2i(3,1)
+	footman_scene.position = board.map_to_local(footman_start_pos)
+	add_child(footman_scene)
+	if place_b == 1:
+		var footman_scene1 = black_footman.instantiate()
+		var footman_start_pos1 = Vector2i(4,0)
+		footman_scene1.position = board.map_to_local(footman_start_pos1)
+		add_child(footman_scene1)
+	elif place_b == 2:
+		var footman_scene2 = black_footman.instantiate()
+		var footman_start_pos2 = Vector2i(2,0)
+		footman_scene2.position = board.map_to_local(footman_start_pos2)
+		add_child(footman_scene2)
 
 #region sort the winner code with kester later
+#func check_winners():
+	#pass
+	#var all_children = $".".get_children()
+	#print("This is all children", all_children)
+	#for i in all_children:
+		#if i is Area2D:
+			#if not i.name == "white_duke:<Area2D#37882955018>":
+				#black_wins()
+			#elif not i.name == "black_duke:<Area2D#38033949982>":
+				#white_wins()
+			
 func black_wins():
 	print("Black wins")
-	emit_signal("black_winner")
+	#emit_signal("black_winner")
 
 func white_wins():
-	emit_signal("white_winner")
+	#emit_signal("white_winner")
 	get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
 
 #endregion 
@@ -92,6 +141,26 @@ func summoned_a_piece(piece_to_make):
 				add_child(pikeman_scene)
 				pikeman_scene.position = board.map_to_local(instantiate_location)
 				next_turn()
+			if piece_to_make == "champion":
+				var champion_scene = white_champion.instantiate()
+				add_child(champion_scene)
+				champion_scene.position = board.map_to_local(instantiate_location)
+			if piece_to_make == "seer":
+				var seer_scene = white_seer.instantiate()
+				add_child(seer_scene)
+				seer_scene.position = board.map_to_local(instantiate_location)
+			if piece_to_make == "wizard":
+				var wizard_scene = white_wizard.instantiate()
+				add_child(wizard_scene)
+				wizard_scene.position = board.map_to_local(instantiate_location)
+			if piece_to_make == "assassin":
+				var assassin_scene = white_assassin.instantiate()
+				add_child(assassin_scene)
+				assassin_scene.position = board.map_to_local(instantiate_location)
+			if piece_to_make == "priest":
+				var priest_scene = white_priest.instantiate()
+				add_child(priest_scene)
+				priest_scene.position = board.map_to_local(instantiate_location)
 		elif instantiate_location == null:
 			summon_move_checker = false
 #endregion

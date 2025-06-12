@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://drshnufabuq2w"]
+
+[ext_resource type="Script" path="res://Scripts/white_pikeman.gd" id="1_cuhbt"]
+[ext_resource type="Texture2D" uid="uid://ck6mh10yqmege" path="res://Assets/pikeman.png" id="2_r0wms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i84kd"]
+atlas = ExtResource("2_r0wms")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shum3"]
+atlas = ExtResource("2_r0wms")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp4df"]
+atlas = ExtResource("2_r0wms")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ec3ff"]
+atlas = ExtResource("2_r0wms")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nigo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i84kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shum3")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tp4df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ec3ff")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_naowg"]
+size = Vector2(16, 16)
+
+[node name="white_pikeman" type="Area2D" groups=["active_pieces", "white_pieces"]]
+script = ExtResource("1_cuhbt")
+
+[node name="white_pikeman" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4nigo")
+animation = &"back"
+autoplay = "front"
+frame_progress = 0.363543
+
+[node name="white_pikeman_shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_naowg")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

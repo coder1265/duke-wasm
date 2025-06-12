@@ -1,6 +1,9 @@
 extends Control
 
 var wduke = preload("res://Scenes/white_duke.tscn")
+#region for referencing all the images for the movement positions
+#var pikeman_front = preload("")
+#endregion
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
