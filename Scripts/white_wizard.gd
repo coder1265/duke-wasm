@@ -99,8 +99,8 @@ func check_location(array):
 			check_array2.append(i_pos)
 	print("This is the array of places where you can't move", check_array2)
 	print("This is incoming array ", array)
-	for a in array:
-		if check_array2.has(a):
+	for a in check_array2:
+		if array.has(a):
 			print("Found this", a)
 			array.erase(a)
 	print("This is returning array", array)
@@ -138,8 +138,6 @@ func clicked_moves():
 		for area in enemy_areas:
 				var area_tilemap_pos = board.local_to_map(area.global_position) - position_on_board
 				if area_tilemap_pos == current_mouse_pos:
-					if area.name == "black_duke":
-						call_deferred("white_winner")
 					area.queue_free()
 		#var current_pos = position_on_board
 		self.position = board.map_to_local(current_mouse_pos + position_on_board)
@@ -159,6 +157,3 @@ func hide_children():
 	for child in range($".".get_children().size()):
 		if is_instance_of($".".get_children()[child],Area2D):
 			$".".get_child(child).queue_free()
-
-func white_winner():
-	$"..".white_wins()

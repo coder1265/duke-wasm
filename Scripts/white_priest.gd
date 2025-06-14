@@ -35,10 +35,6 @@ func _input(_event):
 				showing_moves = false
 
 func do_moves():
-	# get side, #get movement array
-	# check within board
-	# get white pieces, check white pieces, return correct array, check for movement 
-	#delete nodes if capturing
 	move_array.clear()
 	jump_array.clear()
 	if is_front:
@@ -85,16 +81,9 @@ func check_location(array):
 			check_array2.append(i_pos)
 	print("This is the array of places where you can't move", check_array2)
 	print("This is incoming array ", array)
-	#print("This is array 6",array[6])
-	#for a in range(array.size()):
-		#print("This is iteratable ",a)
-		#if check_array2.has(array[a]):
-			#print("Found this", array[a])
-			#array.erase(array[a])
-	#print("This is returning array", array)
 	var return_array = []
-	for a in array:
-		if not check_array2.has(a):
+	for a in check_array2:
+		if array.has(a):
 			return_array.append(a)
 	return return_array
 
@@ -120,8 +109,6 @@ func clicked_moves():
 		for area in enemy_areas:
 				var area_tilemap_pos = board.local_to_map(area.global_position) - position_on_board
 				if area_tilemap_pos == current_mouse_pos:
-					if area.name == "black_duke":
-						call_deferred("white_winner")
 					area.queue_free()
 		#var current_pos = position_on_board
 		self.position = board.map_to_local(current_mouse_pos + position_on_board)
@@ -142,5 +129,5 @@ func hide_children():
 		if is_instance_of($".".get_children()[child],Area2D):
 			$".".get_child(child).queue_free()
 
-func white_winner():
-	$"..".white_wins()
+#func white_winner():
+	#$"..".white_wins()

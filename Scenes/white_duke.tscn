@@ -62,7 +62,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tknc0"]
 size = Vector2(12, 14)
 
-[node name="white_duke" type="Area2D" groups=["active_pieces", "white_pieces"]]
+[node name="white_duke" type="Area2D" groups=["active_pieces", "white_duke", "white_pieces"]]
 z_index = 2
 collision_mask = 3
 script = ExtResource("1_0em7k")

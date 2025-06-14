@@ -45,7 +45,7 @@ func _input(event):
 					is_front_side = false
 				else:
 					is_front_side = true
-				get_node("/root/Main").is_white_turn = false
+				call_deferred("change_turn")
 		if mouse_entered_footman == false: # eliminate holders if clicked off it 
 				for child in range($".".get_children().size()):
 					if is_instance_of($".".get_children()[child],Area2D):
@@ -103,6 +103,7 @@ func white_footman_holders():
 func _on_area_entered(area: Area2D):
 	if local_white_turn:
 		if area.is_in_group("black_pieces"):
-			if area.name == "black_duke":
-				$"..".white_wins()
 			area.queue_free()
+
+func change_turn():
+	get_node("/root/Main").is_white_turn = false

@@ -106,6 +106,7 @@ func clicked_summon():
 					is_front = false
 				else:
 					is_front = true
+				call_deferred("change_turn")
 #endregion
 #region this region is for movement and capturing of the duke
 func do_moves(_event):
@@ -142,8 +143,8 @@ func local_pos_to_map():
 func _on_area_entered(area: Area2D):
 	if local_white_turn:
 		if area.is_in_group("black_pieces"):
-			if area.name == "black_duke":
-				$"..".white_wins()
+			#if area.name == "black_duke":
+				#$"..".white_wins()
 			area.queue_free()
 func updates_moves_to_not_include_white_pieces(incoming_array_to_check):
 	var valid_moves = []
@@ -167,3 +168,6 @@ func delete_children():
 		if is_instance_of($".".get_children()[child],Area2D):
 			$".".get_child(child).queue_free()
 	show_moves = false
+
+func change_turn():
+	get_node("/root/Main").is_white_turn = false

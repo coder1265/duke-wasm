@@ -2,9 +2,13 @@ extends Node2D
 var white_duke_preload = preload("res://Scenes/white_duke.tscn")
 var black_duke_preload = preload("res://Scenes/black_duke.tscn")
 @onready var white_duke_start_pos
+@onready var black_duke_start_pos
+var white_duke_scene
+var black_duke_scene
 var has_instantiated = false
 var instantiate_location
 var white_duke
+var black_duke
 var summon_move_checker:bool = false
 var startup_senario:Array = [1,2] # do this later
 
@@ -26,7 +30,7 @@ var white_wizard = preload("res://Scenes/white_pieces/wizard.tscn")
 #var white_ranger = preload()
 #var white_marshal = preload()
 #var white_dragoon = preload()
-var black_footman
+var black_footman = preload("res://Scenes/black_pieces/black_footman.tscn")
 #endregion
 
 # Called when the node enters the scene tree for the first time.
@@ -34,18 +38,23 @@ func _ready() -> void:
 	start_game()
 
 func start_game():
-	var white_duke_scene = white_duke_preload.instantiate()
+	white_duke_scene = white_duke_preload.instantiate()
 	add_child(white_duke_scene)
 	white_duke_start_pos = Vector2i(2,5)
 	white_duke_scene.position = $"../board_layer".map_to_local(white_duke_start_pos)
+	var all_children = self.get_children()
+	print("This is current all children", all_children)
+	#var white_duke_connect = $"./white_dule"
+	#print("This is white duke connect", white_duke_connect)
+	#white_duke_connect.tree_exiting.connect(black_wins())
 	white_scenarios()
 	
-	var black_duke_scene = black_duke_preload.instantiate()
+	black_duke_scene = black_duke_preload.instantiate()
 	add_child(black_duke_scene)
-	var black_duke_start_pos = Vector2i(3,0)
+	black_duke_start_pos = Vector2i(3,0)
 	black_duke_scene.position = $"../board_layer".map_to_local(black_duke_start_pos)
 	has_instantiated = true
-	#black_scenarios() # uncomment this once made black footman
+	black_scenarios()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -53,7 +62,13 @@ func _process(_delta: float) -> void:
 	var local_pos = $"../board_layer".local_to_map(the_mouse_position)
 	if Input.is_action_just_pressed("left_mouse_click"):
 		print(local_pos)
-	#check_winners()
+	if has_instantiated:
+		var white = get_tree().get_nodes_in_group("white_duke")
+		var black = get_tree().get_nodes_in_group("black_duke")
+		if white.size() == 0:
+			black_wins()
+		if black.size() == 0:
+			white_wins()
 
 func white_scenarios():
 	var place_1 = startup_senario.pick_random()
@@ -90,24 +105,14 @@ func black_scenarios():
 		add_child(footman_scene2)
 
 #region sort the winner code with kester later
-#func check_winners():
-	#pass
-	#var all_children = $".".get_children()
-	#print("This is all children", all_children)
-	#for i in all_children:
-		#if i is Area2D:
-			#if not i.name == "white_duke:<Area2D#37882955018>":
-				#black_wins()
-			#elif not i.name == "black_duke:<Area2D#38033949982>":
-				#white_wins()
+
 			
 func black_wins():
 	print("Black wins")
-	#emit_signal("black_winner")
 
 func white_wins():
-	#emit_signal("white_winner")
-	get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
+	print("white_wins")
+	#get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
 
 #endregion 
 
@@ -124,7 +129,14 @@ func summoned_white():
 
 func summoned_black():
 	print("You have summoned black piece")
-	pass
+	var all_children = get_children()
+	for child in all_children:
+		if child.name == "black_duke":
+			black_duke = child
+	if black_duke != null:
+		summon_move_checker = true
+		black_duke.get_summon_data()
+
 
 func summoned_a_piece(piece_to_make):
 	print("Summoned a piece ", piece_to_make, "Coordinates of piece are", instantiate_location)
@@ -170,3 +182,7 @@ func next_turn():
 		$"/root/Main".is_white_turn = false
 	else:
 		$"/root/Main".is_white_turn = true
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("left_mouse_click"):
+		print("This is white turn variable ",$"/root/Main".is_white_turn)

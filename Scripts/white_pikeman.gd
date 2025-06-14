@@ -140,8 +140,6 @@ func is_position_occupied(world_position: Vector2) -> bool:
 func _on_area_entered(area: Area2D):
 	if local_white_turn:
 		if area.is_in_group("black_pieces"):
-			if area.name == "black_duke":
-				$"..".white_wins()
 			area.queue_free()
 
 func updates_moves_to_not_include_white_pieces(incoming_array_to_check):
@@ -180,10 +178,6 @@ func strike_moves():
 		var coord_to_map = i + pikeman_pos
 		if coord_to_map.x > min_left or coord_to_map.x < min_right or coord_to_map.y > min_top or coord_to_map.y < min_bottom:
 			strike_positions.erase(i)
-	#print("This is strike positions after board check", strike_positions)
-		#var new_coords = i
-		#if new_coords.x > min_left and new_coords.x < min_right and new_coords.y > min_top and new_coords.y < min_bottom:
-			#strike_positions.push_back(i)
 	var new_array = [] # array of unmovable positions local to the pikeman
 	var no_move_to = get_tree().get_nodes_in_group("white_pieces")
 	for i in no_move_to:

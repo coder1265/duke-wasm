@@ -28,7 +28,7 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="black_duke" type="Area2D" groups=["active_pieces", "black_pieces"]]
+[node name="black_duke" type="Area2D" groups=["active_pieces", "black_duke", "black_pieces"]]
 z_index = 2
 script = ExtResource("1_mfmtm")
 
@@ -43,4 +43,6 @@ sprite_frames = SubResource("SpriteFrames_rp38p")
 autoplay = "default"
 frame_progress = 0.748283
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv2hv3t26cx2k"
-path="res://.godot/imported/white_pawn.png-de8397faf9f828ae704e2073ff0ab6c7.ctex"
+uid="uid://ch2vrfxs1qpv6"
+path="res://.godot/imported/black_footman.png-638484b1fb24f98988a95d80e8b53640.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/white_pawn.png"
-dest_files=["res://.godot/imported/white_pawn.png-de8397faf9f828ae704e2073ff0ab6c7.ctex"]
+source_file="res://Assets/black_footman.png"
+dest_files=["res://.godot/imported/black_footman.png-638484b1fb24f98988a95d80e8b53640.ctex"]
 
 [params]
 

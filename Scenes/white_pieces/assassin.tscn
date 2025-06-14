@@ -88,7 +88,6 @@ script = ExtResource("1_87jgu")
 [node name="assassin_img" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(7.15256e-07, 0)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_41xj0")
 animation = &"front"
 autoplay = "front"
